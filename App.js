@@ -3,112 +3,93 @@
  * https://github.com/facebook/react-native
  *
  * @format
- * @flow strict-local
+ * @flow
  */
 
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+import {View, Dimensions} from 'react-native';
 
 import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+  Svg,
+  Circle,
+  Rect,
+  Mask,
+  Defs,
+  Filter,
+  FEGaussianBlur,
+} from './react-native-svg';
 
 const App = () => {
+  const windowWidth = Dimensions.get('window').width;
+  const windowHeight = Dimensions.get('window').height;
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </>
+    <View
+      pointerEvents="auto"
+      style={{
+        width: '100%',
+        left: 0,
+        top: 0,
+        height: '100%',
+        position: 'absolute',
+        zIndex: 99999,
+      }}>
+      <Svg
+        width={windowWidth}
+        height={windowHeight}
+        viewBox={`0 0 ${windowWidth} ${windowHeight}`}
+        // eslint-disable-next-line react-native/no-color-literals
+        style={{
+          opacity: 0.7,
+          width: '100%',
+          left: 0,
+          top: 0,
+          height: '100%',
+          position: 'absolute',
+          zIndex: 99998,
+          color: '#000',
+        }}
+        pointerEvents="none">
+        <Defs>
+          <Filter id="filter-blur" x="0" y="0">
+            <FEGaussianBlur in="SourceGraphic" stdDeviation="15" />
+          </Filter>
+          <Mask
+            id="mask-main"
+            x={0}
+            y={0}
+            width={windowWidth}
+            height={windowHeight}
+            maskUnits="userSpaceOnUse"
+            maskContentUnits="userSpaceOnUse">
+            <Rect
+              x={0}
+              y={0}
+              width={windowWidth}
+              height={windowHeight}
+              fill="white"
+            />
+            <Circle
+              cx={200}
+              cy={500}
+              r={100}
+              filter="url(#filter-blur)"
+              fill="black"
+            />
+            <Circle cx={200} cy={200} r={100} fill="black" />
+          </Mask>
+        </Defs>
+        <Circle cx={250} cy={500} r={100} fill="green" />
+        <Rect
+          x={0}
+          y={0}
+          width={windowWidth}
+          height={windowHeight}
+          fill="currentColor"
+          mask="url(#mask-main)"
+        />
+      </Svg>
+    </View>
   );
 };
-
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
-});
 
 export default App;

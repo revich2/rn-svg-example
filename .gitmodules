@@ -1,0 +1,3 @@
+[submodule "react-native-svg"]
+	path = react-native-svg
+	url = git@github.com:revich2/react-native-svg.git

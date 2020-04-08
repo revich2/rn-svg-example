@@ -71,14 +71,34 @@ const App = () => {
             <Circle
               cx={200}
               cy={500}
-              r={100}
-              filter="url(#filter-blur)"
+              r={170}
+              // filter="url(#filter-blur)"
               fill="black"
             />
             <Circle cx={200} cy={200} r={100} fill="black" />
           </Mask>
         </Defs>
-        <Circle cx={250} cy={500} r={100} fill="green" />
+        <Circle
+          cx={150}
+          cy={500}
+          r={100}
+          fill="blue"
+          // filter="url(#filter-blur)"
+        />
+        <Circle
+          cx={250}
+          cy={400}
+          r={100}
+          fill="red"
+          filter="url(#filter-blur)"
+        />
+        <Circle
+          cx={250}
+          cy={500}
+          r={100}
+          fill="green"
+          // filter="url(#filter-blur)"
+        />
         <Rect
           x={0}
           y={0}

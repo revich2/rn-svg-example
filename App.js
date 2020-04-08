@@ -17,6 +17,7 @@ import {
   Defs,
   Filter,
   FEGaussianBlur,
+  G,
 } from './react-native-svg';
 
 const App = () => {
@@ -71,42 +72,46 @@ const App = () => {
             <Circle
               cx={200}
               cy={500}
-              r={170}
-              // filter="url(#filter-blur)"
+              r={100}
+              filter="url(#filter-blur)"
               fill="black"
             />
             <Circle cx={200} cy={200} r={100} fill="black" />
           </Mask>
         </Defs>
-        <Circle
-          cx={150}
-          cy={500}
-          r={100}
-          fill="blue"
-          // filter="url(#filter-blur)"
-        />
-        <Circle
-          cx={250}
-          cy={400}
-          r={100}
-          fill="red"
-          filter="url(#filter-blur)"
-        />
-        <Circle
-          cx={250}
-          cy={500}
-          r={100}
-          fill="green"
-          // filter="url(#filter-blur)"
-        />
-        <Rect
-          x={0}
-          y={0}
-          width={windowWidth}
-          height={windowHeight}
-          fill="currentColor"
-          mask="url(#mask-main)"
-        />
+        <G /* filter="url(#filter-blur)" */>
+          <Circle
+            cx={150}
+            cy={500}
+            r={100}
+            fill="blue"
+            // filter="url(#filter-blur)"
+          />
+          <Circle
+            cx={250}
+            cy={400}
+            r={100}
+            fill="red"
+            // filter="url(#filter-blur)"
+          />
+          <Circle
+            cx={250}
+            cy={500}
+            r={100}
+            fill="green"
+            // filter="url(#filter-blur)"
+          />
+        </G>
+        {
+          <Rect
+            x={0}
+            y={0}
+            width={windowWidth}
+            height={windowHeight}
+            fill="currentColor"
+            mask="url(#mask-main)"
+          />
+        }
       </Svg>
     </View>
   );
